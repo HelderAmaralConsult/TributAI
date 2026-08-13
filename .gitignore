@@ -8,9 +8,6 @@
 __pycache__/
 *.pyc
 
-# Arquivos PDF
-*.pdf
-
 # Banco vetorial (quando criarmos)
 chroma_db/
 
