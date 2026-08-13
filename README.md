@@ -105,6 +105,29 @@ Aviso
 
 O TributAI tem finalidade educacional e de apoio à pesquisa. As respostas fornecidas pelo sistema não substituem a análise de profissionais especializados nem a consulta às fontes oficiais da legislação vigente.
 
+# Avaliação de Embeddings
+
+## Opção A
+
+Google Embeddings
+
+Vantagens:
+- fácil integração
+- documentação ampla
+
+## Opção B
+
+ulysses-camara/legal-bert-pt-br
+
+Vantagens:
+- especializado em textos jurídicos
+- português brasileiro
+- potencialmente melhor para legislação
+
+Status:
+Em avaliação.
+
+
 ## Autor
 
 Helder Costa Amaral
