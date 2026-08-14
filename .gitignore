@@ -25,3 +25,11 @@ chroma_db/
 .idea/
 
 
+# embeddings gerados
+data/embeddings/
+
+# banco vetorial futuro
+data/vectordb/
+
+# cache huggingface
+.cache/
