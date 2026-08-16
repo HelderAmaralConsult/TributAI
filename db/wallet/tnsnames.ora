@@ -1,0 +1,12 @@
+tributaidb_high = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-saopaulo-1.oraclecloud.com))(connect_data=(service_name=gf843f88c3e3b9d_tributaidb_high.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+tributaidb_medium = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-saopaulo-1.oraclecloud.com))(connect_data=(service_name=gf843f88c3e3b9d_tributaidb_medium.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+tributaidb_low = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-saopaulo-1.oraclecloud.com))(connect_data=(service_name=gf843f88c3e3b9d_tributaidb_low.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+tributaidb_tp = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-saopaulo-1.oraclecloud.com))(connect_data=(service_name=gf843f88c3e3b9d_tributaidb_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+tributaidb_tpurgent = (description= (retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=adb.sa-saopaulo-1.oraclecloud.com))(connect_data=(service_name=gf843f88c3e3b9d_tributaidb_tpurgent.adb.oraclecloud.com))(security=(ssl_server_dn_match=yes)))
+
+
+

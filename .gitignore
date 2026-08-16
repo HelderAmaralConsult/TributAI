@@ -24,7 +24,6 @@ chroma_db/
 # JetBrains
 .idea/
 
-
 # embeddings gerados
 data/embeddings/
 
@@ -33,3 +32,10 @@ data/vectordb/
 
 # cache huggingface
 .cache/
+
+# ambiente
+.env
+
+#obsoleto
+archive/
+

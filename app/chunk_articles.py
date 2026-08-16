@@ -1,8 +1,6 @@
-import re
-from pathlib import Path
+# app/chunk_articles.py
 
-# Arquivo que será analisado
-ARQUIVO = "data/processed/Lei_Complementar_214.txt"
+import re
 
 
 def carregar_texto(caminho):
@@ -11,43 +9,24 @@ def carregar_texto(caminho):
 
 
 def separar_artigos(texto):
-    """
-    Divide o texto em chunks baseados em artigos.
-
-    Exemplos capturados:
-    Art. 1º
-    Art. 7º-A
-    Art. 10.
-    Art. 156-A
-    """
-
     padrao = r'(?=Art\.\s+\d+[º°]?(?:-[A-Z])?)'
-
     artigos = re.split(padrao, texto)
-
-    artigos = [a.strip() for a in artigos if a.strip()]
-
-    return artigos
+    return [a.strip() for a in artigos if a.strip()]
 
 
-def main():
-    texto = carregar_texto(ARQUIVO)
-
-    artigos = separar_artigos(texto)
-
-    print("=" * 60)
-    print(f"Documento: {Path(ARQUIVO).name}")
-    print(f"Artigos encontrados: {len(artigos)}")
-    print("=" * 60)
-
-    print("\nPrimeiros 5 artigos:\n")
-
-    for i, artigo in enumerate(artigos[:5], start=1):
-        print(f"--- CHUNK {i} ---")
-        print(f"Tamanho: {len(artigo)} caracteres")
-        print(artigo[:500])
-        print("\n")
+def gerar_chunks(caminho):
+    texto = carregar_texto(caminho)
+    return separar_artigos(texto)
 
 
-if __name__ == "__main__":
-    main()
+def extrair_artigo(conteudo):
+    match = re.match(
+      # r"^(Art\.\s+\d+(?:-[A-Z])?[º°]?)",
+        r"^(Art\.\s+\d+[º°]?(?:-[A-Z])?)",
+        conteudo
+    )
+
+    if match:
+        return match.group(1)
+
+    return None
