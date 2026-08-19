@@ -1,135 +1,297 @@
 # TributAI
 
-Assistente inteligente baseado em IA para consulta da Reforma Tributária Brasileira utilizando RAG (Retrieval-Augmented Generation) e documentos oficiais.
+Assistente inteligente baseado em IA para consulta da Reforma Tributária Brasileira utilizando busca semântica, embeddings jurídicos e Oracle AI Vector Search.
 
 ## Sobre o Projeto
 
-O TributAI é um agente de Inteligência Artificial desenvolvido para facilitar a consulta e compreensão da legislação relacionada à Reforma Tributária Brasileira.
+O TributAI é uma solução de Inteligência Artificial desenvolvida para facilitar a consulta e compreensão da legislação relacionada à Reforma Tributária Brasileira.
 
-O projeto utilizará documentos oficiais públicos, como:
+O projeto utiliza documentos oficiais públicos, como:
 
 - Emenda Constitucional nº 132/2023
 - Lei Complementar nº 214/2025
-- Normativos da Receita Federal
-- Notas Técnicas
-- Guias e publicações oficiais
 - Regulamentações complementares
+- Notas Técnicas
+- Guias Oficiais
+- Publicações da Receita Federal
 
-A proposta é permitir que usuários realizem perguntas em linguagem natural e recebam respostas fundamentadas nos documentos oficiais indexados pelo sistema.
+A solução permite que usuários realizem perguntas em linguagem natural e recuperem os trechos mais relevantes da legislação utilizando busca semântica baseada em embeddings.
+
+---
 
 ## Objetivo
 
-Reduzir o tempo gasto na busca e interpretação de informações relacionadas à Reforma Tributária, oferecendo uma experiência de consulta simples, rápida e baseada em fontes confiáveis.
+Reduzir o tempo gasto na pesquisa e interpretação da legislação tributária, oferecendo uma experiência de consulta simples, rápida e baseada em fontes oficiais e auditáveis.
 
-## Funcionalidades Planejadas
+---
 
-- Consulta em linguagem natural
-- Busca semântica em documentos oficiais
-- Respostas fundamentadas em fontes oficiais
-- Exibição das referências utilizadas
-- API para integração com outras aplicações
-- Implantação em ambiente Oracle Cloud Infrastructure (OCI)
+## Situação Atual
 
-## Arquitetura (Planejada)
+✅ MVP funcional concluído.
+
+Atualmente o TributAI já é capaz de:
+
+- Receber perguntas em linguagem natural
+- Gerar embeddings utilizando Legal-BERT
+- Executar busca semântica utilizando Oracle AI Vector Search
+- Recuperar os 5 trechos mais relevantes da legislação
+- Exibir os resultados através do Oracle APEX
+- Registrar histórico das consultas realizadas
+- Disponibilizar serviços REST protegidos por HTTPS
+
+---
+
+## Arquitetura Atual
 
 ```text
 Usuário
    │
    ▼
-API (FastAPI)
+Oracle APEX
    │
    ▼
-LangChain
+REST Data Source
    │
    ▼
-Retriever
+HTTPS
    │
    ▼
-Banco Vetorial (ChromaDB)
+tributai.duckdns.org
    │
    ▼
-Documentos Oficiais
+Nginx (Reverse Proxy)
    │
    ▼
-Modelo de Linguagem (LLM)
+Gunicorn
+   │
+   ▼
+Flask
+   │
+   ▼
+Legal-BERT (ulysses-camara/legal-bert-pt-br)
+   │
+   ▼
+Geração de Embeddings
+   │
+   ▼
+Oracle AI Vector Search
+   │
+   ▼
+Busca Semântica nos Chunks da Legislação
+   │
+   ▼
+Top 5 Resultados Mais Relevantes
 ```
-## Tecnologias Previstas
-Python
-LangChain
-ChromaDB
-FastAPI
-Google Gemini
-Docker
-Oracle Cloud Infrastructure (OCI)
-GitHub
 
-## Estrutura Inicial do Projeto
+---
+
+## Fluxo Implementado
+
 ```text
-1 TributAI/
-     │
-2    ├── docs/
-3    ├── app/
-4    ├── tests/
-5    ├── screenshots/
-6    ├── requirements.txt
-7    └── README.md
-
-
+Pergunta em Linguagem Natural
+   │
+   ▼
+Geração de Embedding
+   │
+   ▼
+Oracle AI Vector Search
+   │
+   ▼
+VECTOR_DISTANCE
+   │
+   ▼
+Top 5 Chunks Mais Relevantes
+   │
+   ▼
+Exibição no Oracle APEX
+   │
+   ▼
+Registro do Histórico da Consulta
 ```
-## Status do Projeto
 
-🚧 Em desenvolvimento.
+---
 
-Atualmente o projeto encontra-se na fase de planejamento e definição da arquitetura da solução.
+## Tecnologias Utilizadas
+
+### Front-end
+
+- Oracle APEX
+
+### Backend
+
+- Python
+- Flask
+- Gunicorn
+- Nginx
+- systemd
+
+### Inteligência Artificial
+
+- Legal-BERT PT-BR (`ulysses-camara/legal-bert-pt-br`)
+- Sentence Transformers
+
+### Banco de Dados
+
+- Oracle Autonomous Database 23ai
+- Oracle AI Vector Search
+- Oracle VECTOR
+- Oracle VECTOR_DISTANCE
+
+### Infraestrutura
+
+- Oracle Cloud Infrastructure (OCI)
+- DuckDNS
+- Let's Encrypt
+
+### DevOps e Versionamento
+
+- Git
+- GitHub
+
+---
+
+## Endpoints da API
+
+### Verificação de Saúde
+
+Endpoint utilizado para monitoramento da aplicação.
+
+```http
+GET /health
+```
+
+Exemplo:
+
+```http
+GET https://tributai.duckdns.org/health
+```
+
+Resposta:
+
+```json
+{
+  "status": "ok"
+}
+```
+
+---
+
+### Geração de Embeddings
+
+Endpoint responsável pela geração dos embeddings utilizados na busca semântica.
+
+```http
+POST /embed
+```
+
+Exemplo:
+
+```http
+POST https://tributai.duckdns.org/embed
+Content-Type: application/json
+```
+
+Body:
+
+```json
+{
+  "pergunta": "Qual a alíquota do Imposto Seletivo para alimentos?"
+}
+```
+
+Resposta:
+
+```json
+{
+  "embedding": [
+    -0.0604,
+    -0.0450,
+    -0.0210
+  ]
+}
+```
+
+---
+
+## Funcionalidades Implementadas
+
+- Consulta em linguagem natural
+- Busca semântica sobre legislação tributária
+- Geração de embeddings jurídicos
+- Busca vetorial utilizando Oracle AI Vector Search
+- Recuperação dos 5 trechos mais relevantes
+- Histórico de consultas
+- API REST para geração de embeddings
+- Implantação em Oracle Cloud Infrastructure (OCI)
+- Publicação segura via HTTPS
+
+---
+
+## Estrutura do Projeto
+
+```text
+TributAI/
+│
+├── apex/
+│   └── Export da aplicação Oracle APEX
+│
+├── db/
+│   ├── ddl/
+│   ├── repositories/
+│   └── scripts/
+│
+├── docs/
+│   ├── diario_de_bordo.md
+│   └── documentacao_tecnica.md
+│
+├── tests/
+│
+├── screenshots/
+│
+├── embedding_service.py
+├── requirements.txt
+└── README.md
+```
+
+---
 
 ## Roadmap
-Fase 1 - Planejamento
- Definição da ideia
- Definição do escopo
- Criação do repositório GitHub
- Definição da arquitetura
-Fase 2 - Protótipo Local
- Leitura dos documentos
- Processamento dos PDFs
- Geração de embeddings
- Criação da base vetorial
- Implementação do agente RAG
-Fase 3 - API
- Criação da API com FastAPI
- Testes locais
-Fase 4 - Deploy
- Publicação na OCI
- Testes em ambiente cloud
- Evidências de funcionamento
-Aviso
 
-O TributAI tem finalidade educacional e de apoio à pesquisa. As respostas fornecidas pelo sistema não substituem a análise de profissionais especializados nem a consulta às fontes oficiais da legislação vigente.
+### V1 - MVP Funcional ✅
 
-# Avaliação de Embeddings
+- Consulta em linguagem natural
+- Geração de embeddings com Legal-BERT
+- Oracle AI Vector Search
+- Recuperação dos 5 chunks mais relevantes
+- Histórico de consultas
+- Integração Oracle APEX
 
-## Opção A
+### V2 - Em Desenvolvimento
 
-Google Embeddings
+- Integração com LLM
+- Resposta consolidada em linguagem natural
+- Exibição das fontes utilizadas
+- Resumo contextual dos artigos recuperados
 
-Vantagens:
-- fácil integração
-- documentação ampla
+### V3 - Evoluções Futuras
 
-## Opção B
+- Feedback dos usuários
+- Dashboard de utilização
+- Métricas de relevância
+- Monitoramento e observabilidade
 
-ulysses-camara/legal-bert-pt-br
+---
 
-Vantagens:
-- especializado em textos jurídicos
-- português brasileiro
-- potencialmente melhor para legislação
+## Aviso
 
-Status:
-Em avaliação.
+O TributAI possui finalidade educacional e de apoio à pesquisa.
 
+As respostas fornecidas pelo sistema não substituem a análise de profissionais especializados nem a consulta às fontes oficiais da legislação vigente.
+
+---
 
 ## Autor
 
-Helder Costa Amaral
+**Helder Costa Amaral**
 
-Projeto desenvolvido como parte do Challenge Alura-Oracle ONE.
+Projeto desenvolvido como parte do Challenge Alura + Oracle ONE e evoluído para estudo aplicado de IA Generativa, Busca Vetorial e Oracle AI Vector Search.
