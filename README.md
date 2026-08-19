@@ -2,6 +2,9 @@
 
 Assistente inteligente baseado em IA para consulta da Reforma Tributária Brasileira utilizando busca semântica, embeddings jurídicos e Oracle AI Vector Search.
 
+URL da Aplicação:
+https://gf843f88c3e3b9d-tributaidb.adb.sa-saopaulo-1.oraclecloudapps.com/ords/r/tributai/tributai/consulta-tributai
+
 ## Sobre o Projeto
 
 O TributAI é uma solução de Inteligência Artificial desenvolvida para facilitar a consulta e compreensão da legislação relacionada à Reforma Tributária Brasileira.
