@@ -1,2 +1,15 @@
-pypdf==6.15.0
+# API
+flask==3.1.2
+gunicorn==23.0.0
+
+# IA / Embeddings
+sentence-transformers==5.1.0
+transformers==4.56.1
+torch==2.8.0
+numpy==2.3.2
+
+# Utilidades
 python-dotenv==1.2.2
+
+# Processamento de PDFs
+pypdf==6.1.0
